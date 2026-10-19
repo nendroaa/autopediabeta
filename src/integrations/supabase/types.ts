@@ -14,16 +14,199 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      perfiles: {
+        Row: {
+          ciudad: string | null
+          created_at: string
+          id: string
+          nombre: string
+          nombre_taller: string | null
+          rol: string
+          verificado: boolean
+        }
+        Insert: {
+          ciudad?: string | null
+          created_at?: string
+          id: string
+          nombre?: string
+          nombre_taller?: string | null
+          rol: string
+          verificado?: boolean
+        }
+        Update: {
+          ciudad?: string | null
+          created_at?: string
+          id?: string
+          nombre?: string
+          nombre_taller?: string | null
+          rol?: string
+          verificado?: boolean
+        }
+        Relationships: []
+      }
+      publicaciones: {
+        Row: {
+          anio: number
+          conductor_id: string
+          created_at: string
+          descripcion: string
+          estado: string
+          id: string
+          marca: string
+          modelo: string
+          sintoma: string
+        }
+        Insert: {
+          anio: number
+          conductor_id?: string
+          created_at?: string
+          descripcion?: string
+          estado?: string
+          id?: string
+          marca: string
+          modelo: string
+          sintoma: string
+        }
+        Update: {
+          anio?: number
+          conductor_id?: string
+          created_at?: string
+          descripcion?: string
+          estado?: string
+          id?: string
+          marca?: string
+          modelo?: string
+          sintoma?: string
+        }
+        Relationships: []
+      }
+      respuestas: {
+        Row: {
+          created_at: string
+          diagnostico: string
+          id: string
+          mecanico_id: string
+          publicacion_id: string
+        }
+        Insert: {
+          created_at?: string
+          diagnostico: string
+          id?: string
+          mecanico_id?: string
+          publicacion_id: string
+        }
+        Update: {
+          created_at?: string
+          diagnostico?: string
+          id?: string
+          mecanico_id?: string
+          publicacion_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "respuestas_publicacion_id_fkey"
+            columns: ["publicacion_id"]
+            isOneToOne: false
+            referencedRelation: "publicaciones"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      transacciones: {
+        Row: {
+          comision: number
+          conductor_id: string
+          created_at: string
+          estado: string
+          id: string
+          mecanico_id: string
+          pagador: string
+          precio: number
+          publicacion_id: string
+          respuesta_id: string
+        }
+        Insert: {
+          comision?: number
+          conductor_id: string
+          created_at?: string
+          estado?: string
+          id?: string
+          mecanico_id: string
+          pagador?: string
+          precio?: number
+          publicacion_id: string
+          respuesta_id: string
+        }
+        Update: {
+          comision?: number
+          conductor_id?: string
+          created_at?: string
+          estado?: string
+          id?: string
+          mecanico_id?: string
+          pagador?: string
+          precio?: number
+          publicacion_id?: string
+          respuesta_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "transacciones_publicacion_id_fkey"
+            columns: ["publicacion_id"]
+            isOneToOne: false
+            referencedRelation: "publicaciones"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transacciones_respuesta_id_fkey"
+            columns: ["respuesta_id"]
+            isOneToOne: false
+            referencedRelation: "respuestas"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      user_roles: {
+        Row: {
+          id: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Insert: {
+          id?: string
+          role: Database["public"]["Enums"]["app_role"]
+          user_id: string
+        }
+        Update: {
+          id?: string
+          role?: Database["public"]["Enums"]["app_role"]
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      confirmar_solucion: {
+        Args: { _respuesta_id: string }
+        Returns: undefined
+      }
+      contar_soluciones: { Args: never; Returns: number }
+      es_conductor: { Args: { _uid: string }; Returns: boolean }
+      es_mecanico_verificado: { Args: { _uid: string }; Returns: boolean }
+      has_role: {
+        Args: {
+          _role: Database["public"]["Enums"]["app_role"]
+          _user_id: string
+        }
+        Returns: boolean
+      }
+      verificar_mecanico: { Args: { _id: string }; Returns: undefined }
     }
     Enums: {
-      [_ in never]: never
+      app_role: "admin"
     }
     CompositeTypes: {
       [_ in never]: never
@@ -150,6 +333,8 @@ export type CompositeTypes<
 
 export const Constants = {
   public: {
-    Enums: {},
+    Enums: {
+      app_role: ["admin"],
+    },
   },
 } as const
