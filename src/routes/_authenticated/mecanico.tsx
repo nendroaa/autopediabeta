@@ -95,11 +95,11 @@ function PubAbierta({ p, yaRespondi }: { p: { id: string; marca: string; modelo:
   const [enviando, setEnviando] = useState(false);
 
   async function responder() {
-    if (texto.trim().length < 10) return toast.error("Escribe un diagnóstico un poco más detallado");
+    if (texto.trim().length < 10) { toast.error("Escribe un diagnóstico un poco más detallado"); return; }
     setEnviando(true);
     const { error } = await supabase.from("respuestas").insert({ publicacion_id: p.id, diagnostico: texto.trim() });
     setEnviando(false);
-    if (error) return toast.error("No se pudo enviar: " + error.message);
+    if (error) { toast.error("No se pudo enviar: " + error.message); return; }
     toast.success("Diagnóstico enviado");
     setTexto(""); setAbierto(false);
     qc.invalidateQueries({ queryKey: ["abiertas"] });

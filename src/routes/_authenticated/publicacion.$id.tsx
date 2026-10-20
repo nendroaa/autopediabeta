@@ -37,7 +37,7 @@ function Detalle() {
 
   async function confirmar(respuestaId: string) {
     const { error } = await supabase.rpc("confirmar_solucion", { _respuesta_id: respuestaId });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("¡Solución confirmada! Gracias por ayudar a otros conductores.");
     qc.invalidateQueries();
   }

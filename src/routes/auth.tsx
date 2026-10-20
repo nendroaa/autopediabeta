@@ -12,10 +12,12 @@ import { cn } from "@/lib/utils";
 type Search = { rol?: "conductor" | "mecanico"; modo?: "registro" | "ingreso" };
 
 export const Route = createFileRoute("/auth")({
-  validateSearch: (s: Record<string, unknown>): Search => ({
-    rol: s.rol === "mecanico" ? "mecanico" : s.rol === "conductor" ? "conductor" : undefined,
-    modo: s.modo === "ingreso" ? "ingreso" : s.modo === "registro" ? "registro" : undefined,
-  }),
+  validateSearch: (s: Record<string, unknown>): Search => {
+    const out: Search = {};
+    if (s["rol"] === "mecanico" || s["rol"] === "conductor") out.rol = s["rol"];
+    if (s["modo"] === "ingreso" || s["modo"] === "registro") out.modo = s["modo"];
+    return out;
+  },
   head: () => ({
     meta: [
       { title: "Ingresar o registrarse — AutoPedia" },

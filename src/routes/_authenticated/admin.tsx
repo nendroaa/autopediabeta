@@ -26,7 +26,7 @@ function Admin() {
 
   async function verificar(id: string) {
     const { error } = await supabase.rpc("verificar_mecanico", { _id: id });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Mecánico verificado");
     qc.invalidateQueries({ queryKey: ["pendientes"] });
   }

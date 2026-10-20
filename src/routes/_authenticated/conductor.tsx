@@ -82,13 +82,13 @@ function NuevaPublicacion() {
   async function guardar(e: React.FormEvent) {
     e.preventDefault();
     const anio = Number(f.anio);
-    if (!anio || anio < 1980 || anio > new Date().getFullYear() + 1) return toast.error("Año inválido");
+    if (!anio || anio < 1980 || anio > new Date().getFullYear() + 1) { toast.error("Año inválido"); return; }
     setGuardando(true);
     const { error } = await supabase.from("publicaciones").insert({
       marca: f.marca.trim(), modelo: f.modelo.trim(), anio, sintoma: f.sintoma.trim(), descripcion: f.descripcion.trim(),
     });
     setGuardando(false);
-    if (error) return toast.error("No se pudo publicar: " + error.message);
+    if (error) { toast.error("No se pudo publicar: " + error.message); return; }
     toast.success("Síntoma publicado");
     setF({ marca: "", modelo: "", anio: "", sintoma: "", descripcion: "" });
     setOpen(false);
