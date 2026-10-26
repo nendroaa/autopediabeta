@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { EstadoBadge } from "@/components/EstadoBadge";
 
 export const Route = createFileRoute("/_authenticated/publicacion/$id")({
-  head: () => ({ meta: [{ title: "Detalle de publicación — AutoPedia" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Detalle de publicación — AutoPedia" }, { name: "description", content: "Revisa diagnósticos y confirma la solución de tu publicación en AutoPedia." }, { property: "og:title", content: "Detalle de publicación — AutoPedia" }, { property: "og:description", content: "Revisa diagnósticos y confirma la solución de tu publicación en AutoPedia." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: Detalle,
 });
 

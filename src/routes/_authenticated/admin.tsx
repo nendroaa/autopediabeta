@@ -6,7 +6,7 @@ import { usePerfil } from "@/lib/perfil";
 import { Button } from "@/components/ui/button";
 
 export const Route = createFileRoute("/_authenticated/admin")({
-  head: () => ({ meta: [{ title: "Administración — AutoPedia" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Administración — AutoPedia" }, { name: "description", content: "Gestiona la verificación de talleres registrados en AutoPedia." }, { property: "og:title", content: "Administración — AutoPedia" }, { property: "og:description", content: "Gestiona la verificación de talleres registrados en AutoPedia." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: Admin,
 });
 

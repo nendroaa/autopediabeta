@@ -5,7 +5,7 @@ import { CheckCircle2, Search } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 
 export const Route = createFileRoute("/_authenticated/foro")({
-  head: () => ({ meta: [{ title: "Buscador del foro — AutoPedia" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Buscador del foro — AutoPedia" }, { name: "description", content: "Busca soluciones confirmadas por marca, modelo, año y síntoma en AutoPedia." }, { property: "og:title", content: "Buscador del foro — AutoPedia" }, { property: "og:description", content: "Busca soluciones confirmadas por marca, modelo, año y síntoma en AutoPedia." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: Foro,
 });
 
