@@ -13,7 +13,7 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from 
 import { EstadoBadge } from "@/components/EstadoBadge";
 
 export const Route = createFileRoute("/_authenticated/conductor")({
-  head: () => ({ meta: [{ title: "Mis publicaciones — AutoPedia" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Mis publicaciones — AutoPedia" }, { name: "description", content: "Consulta tus síntomas publicados y sus diagnósticos en AutoPedia." }, { property: "og:title", content: "Mis publicaciones — AutoPedia" }, { property: "og:description", content: "Consulta tus síntomas publicados y sus diagnósticos en AutoPedia." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: PanelConductor,
 });
 
@@ -23,9 +23,10 @@ function PanelConductor() {
     queryKey: ["mis-publicaciones", perfil?.id],
     enabled: !!perfil,
     queryFn: async () => {
+      if (!perfil) return [];
       const { data, error } = await supabase
         .from("publicaciones").select("*, respuestas(count)")
-        .eq("conductor_id", perfil!.id).order("created_at", { ascending: false });
+        .eq("conductor_id", perfil.id).order("created_at", { ascending: false });
       if (error) throw error;
       return data;
     },

@@ -11,7 +11,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { EstadoBadge } from "@/components/EstadoBadge";
 
 export const Route = createFileRoute("/_authenticated/mecanico")({
-  head: () => ({ meta: [{ title: "Panel mecánico — AutoPedia" }, { name: "robots", content: "noindex" }] }),
+  head: () => ({ meta: [{ title: "Panel mecánico — AutoPedia" }, { name: "description", content: "Responde consultas de conductores y revisa tus diagnósticos en AutoPedia." }, { property: "og:title", content: "Panel mecánico — AutoPedia" }, { property: "og:description", content: "Responde consultas de conductores y revisa tus diagnósticos en AutoPedia." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary" }, { name: "robots", content: "noindex" }] }),
   component: PanelMecanico,
 });
 

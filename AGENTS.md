@@ -9,5 +9,6 @@
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
 
-- Workflow state changes (respuesta → transacción, confirmar, verificar) live in SECURITY DEFINER Postgres triggers/RPCs; the client only calls them — keeps rules enforced server-side.
+- Workflow state changes (publication → transaction, first response, confirmation, verification) live in SECURITY DEFINER Postgres triggers/RPCs; the client only calls them — keeps rules enforced server-side and serializes response/confirmation through publication row locks.
+- Transaction workflow tests execute the real migrations in disposable PGlite databases with synthetic auth fixtures — verifies PostgreSQL triggers and RLS without changing hosted user data.
 - Admin role lives in user_roles (has_role); conductor/mecánico role lives in perfiles.rol and is set only by the signup trigger — prevents privilege escalation.
