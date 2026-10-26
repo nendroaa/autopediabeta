@@ -119,11 +119,11 @@ export type Database = {
           created_at: string
           estado: string
           id: string
-          mecanico_id: string
+          mecanico_id: string | null
           pagador: string
           precio: number
           publicacion_id: string
-          respuesta_id: string
+          respuesta_id: string | null
         }
         Insert: {
           comision?: number
@@ -131,11 +131,11 @@ export type Database = {
           created_at?: string
           estado?: string
           id?: string
-          mecanico_id: string
+          mecanico_id?: string | null
           pagador?: string
           precio?: number
           publicacion_id: string
-          respuesta_id: string
+          respuesta_id?: string | null
         }
         Update: {
           comision?: number
@@ -143,17 +143,31 @@ export type Database = {
           created_at?: string
           estado?: string
           id?: string
-          mecanico_id?: string
+          mecanico_id?: string | null
           pagador?: string
           precio?: number
           publicacion_id?: string
-          respuesta_id?: string
+          respuesta_id?: string | null
         }
         Relationships: [
           {
+            foreignKeyName: "transacciones_conductor_perfil_fk"
+            columns: ["conductor_id"]
+            isOneToOne: false
+            referencedRelation: "perfiles"
+            referencedColumns: ["id"]
+          },
+          {
+            foreignKeyName: "transacciones_mecanico_perfil_fk"
+            columns: ["mecanico_id"]
+            isOneToOne: false
+            referencedRelation: "perfiles"
+            referencedColumns: ["id"]
+          },
+          {
             foreignKeyName: "transacciones_publicacion_id_fkey"
             columns: ["publicacion_id"]
-            isOneToOne: false
+            isOneToOne: true
             referencedRelation: "publicaciones"
             referencedColumns: ["id"]
           },
