@@ -14,6 +14,30 @@ export type Database = {
   }
   public: {
     Tables: {
+      eventos: {
+        Row: {
+          detalle: Json
+          fecha: string
+          id: string
+          tipo: string
+          user_id: string | null
+        }
+        Insert: {
+          detalle?: Json
+          fecha?: string
+          id?: string
+          tipo: string
+          user_id?: string | null
+        }
+        Update: {
+          detalle?: Json
+          fecha?: string
+          id?: string
+          tipo?: string
+          user_id?: string | null
+        }
+        Relationships: []
+      }
       perfiles: {
         Row: {
           ciudad: string | null
@@ -217,6 +241,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      registrar_clic_destacar: { Args: never; Returns: undefined }
       verificar_mecanico: { Args: { _id: string }; Returns: undefined }
     }
     Enums: {
