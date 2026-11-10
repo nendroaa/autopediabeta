@@ -37,6 +37,7 @@ describe('Registro de transacciones: reglas reales de PostgreSQL', () => {
       await db.query('INSERT INTO auth.users VALUES ($1, $2)', [id, JSON.stringify({ rol })]);
     }
     await db.query('UPDATE public.perfiles SET verificado = true WHERE id IN ($1, $2)', [mecanico, otroMecanico]);
+    await db.query('UPDATE public.perfiles SET verificado = false WHERE id = $1', [sinVerificar]);
   }, 30000);
   afterAll(async () => { await db.close(); });
   beforeEach(async () => {

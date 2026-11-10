@@ -2,7 +2,6 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { useMemo, useState } from "react";
 import { toast } from "sonner";
-import { Clock } from "lucide-react";
 import { supabase } from "@/integrations/supabase/client";
 import { usePerfil } from "@/lib/perfil";
 import { Button } from "@/components/ui/button";
@@ -28,15 +27,7 @@ function PanelMecanico() {
         <h1 className="text-2xl font-bold">{perfil.nombre_taller}</h1>
         <p className="text-sm text-muted-foreground">{perfil.ciudad}</p>
       </div>
-      {!perfil.verificado ? (
-        <div className="flex gap-3 rounded-xl border border-warning bg-warning/20 p-4">
-          <Clock className="h-5 w-5 shrink-0 text-warning-foreground" />
-          <div>
-            <p className="font-semibold text-warning-foreground">Tu taller está en proceso de verificación</p>
-            <p className="text-sm text-muted-foreground">Cuando te verifiquemos podrás ver y responder consultas.</p>
-          </div>
-        </div>
-      ) : (
+      {(
         <Tabs defaultValue="abiertas">
           <TabsList className="w-full">
             <TabsTrigger value="abiertas" className="flex-1">Publicaciones abiertas</TabsTrigger>

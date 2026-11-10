@@ -15,6 +15,13 @@
       "when": 1792982030457,
       "tag": "0001_transaction_lifecycle",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1794271355965,
+      "tag": "0002_auto_verify_mechanics",
+      "breakpoints": true
     }
   ]
 }
