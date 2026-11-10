@@ -1,26 +1,20 @@
-# Autopediabeta
+# AutoPedia - Functional MVP (Hito 3)
 
-Implement exactly the screenshot and nothing else
+Plataforma digital B2B2C que conecta conductores particulares en Chile con talleres mecánicos independientes.
 
-This project was built with [Lovable](https://lovable.dev).
+## Información General
+- **URL Pública del MVP:** https://autopediabeta.lovable.app
+- **Tecnologías:** React, Vite, Tailwind CSS, Supabase / PostgreSQL.
 
-**Live app**: https://autopediabeta.lovable.app
+## Cuentas de Prueba por Rol (Sin verificación requerida)
+- **Rol Conductor:** conductor.autopedia@gmail.com / Autopedia2026!
+- **Rol Taller Mecánico:** mecanico.autopedia@gmail.com / Autopedia2026!
 
-## Build with Lovable
+## Seguridad y Persistencia
+- Autenticación mediante Supabase Auth.
+- Seguridad a nivel de filas (RLS - Row Level Security) en PostgreSQL según rol de usuario.
+- Flujo funcional de reserva de servicios y actualización en tiempo real del panel del taller.
 
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/734913b4-8eef-4617-a024-a589c9d1ae58).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
-npm run dev
-```
+## Declaración de Uso de IA
+- Código base y frontend desarrollados con asistencia de Lovable.dev.
+- Consultas de base de datos y esquemas estructurados con soporte de IA.
