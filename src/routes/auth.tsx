@@ -38,7 +38,6 @@ function AuthPage() {
   const [rol, setRol] = useState<"conductor" | "mecanico">(search.rol ?? "conductor");
   const [f, setF] = useState({ nombre: "", email: "", password: "", nombre_taller: "", ciudad: "" });
   const [cargando, setCargando] = useState(false);
-  const [enviado, setEnviado] = useState(false);
   const set = (k: keyof typeof f) => (e: React.ChangeEvent<HTMLInputElement>) => setF({ ...f, [k]: e.target.value });
 
   async function enviar(e: React.FormEvent) {
@@ -62,8 +61,11 @@ function AuthPage() {
           },
         });
         if (error) throw error;
-        if (data.session) navigate({ to: "/panel" });
-        else setEnviado(true);
+        if (!data.session) {
+          const { error: e2 } = await supabase.auth.signInWithPassword({ email: f.email, password: f.password });
+          if (e2) throw e2;
+        }
+        navigate({ to: "/panel" });
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Algo salió mal";
@@ -77,15 +79,7 @@ function AuthPage() {
     <div className="flex min-h-screen flex-col bg-hero px-4 py-8 text-primary-foreground">
       <Link to="/" className="mx-auto mb-6"><Logo /></Link>
       <div className="mx-auto w-full max-w-md rounded-2xl bg-card p-6 text-card-foreground shadow-card">
-        {enviado ? (
-          <div className="space-y-3 text-center">
-            <h1 className="text-xl font-bold">Revisa tu correo</h1>
-            <p className="text-sm text-muted-foreground">
-              Te enviamos un enlace a <strong>{f.email}</strong> para confirmar tu cuenta.
-            </p>
-            <Button variant="outline" onClick={() => { setEnviado(false); setModo("ingreso"); }}>Ir a ingresar</Button>
-          </div>
-        ) : (
+        {(
           <>
             <div className="mb-5 grid grid-cols-2 rounded-lg bg-secondary p-1 text-sm font-semibold">
               {(["ingreso", "registro"] as const).map((m) => (
