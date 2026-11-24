@@ -20,12 +20,18 @@ function PanelMecanico() {
   const { data: perfil, isLoading } = usePerfil();
   if (isLoading) return <p className="text-muted-foreground">Cargando…</p>;
   if (perfil?.rol !== "mecanico") return <p className="text-muted-foreground">Esta sección es solo para mecánicos.</p>;
+  async function destacar() {
+    const { error } = await supabase.rpc("registrar_clic_destacar");
+    if (error) { toast.error(error.message); return; }
+    toast.success("¡Gracias! Te contactaremos pronto para destacar tu taller.");
+  }
 
   return (
     <div className="space-y-5">
       <div>
         <h1 className="text-2xl font-bold">{perfil.nombre_taller}</h1>
         <p className="text-sm text-muted-foreground">{perfil.ciudad}</p>
+        <Button variant="accent" size="sm" className="mt-3" onClick={destacar}>Destacar mi taller</Button>
       </div>
       {(
         <Tabs defaultValue="abiertas">

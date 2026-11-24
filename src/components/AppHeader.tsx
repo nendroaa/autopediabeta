@@ -34,7 +34,7 @@ export function AppHeader() {
   return (
     <header className="sticky top-0 z-20 border-b bg-card/95 backdrop-blur">
       <div className="mx-auto flex max-w-3xl items-center justify-between px-4 py-3">
-        <Link to="/panel"><Logo /></Link>
+        <Link to="/inicio"><Logo /></Link>
         <Button variant="ghost" size="sm" onClick={salir} aria-label="Cerrar sesión">
           <LogOut /> <span className="hidden sm:inline">Salir</span>
         </Button>

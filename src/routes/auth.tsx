@@ -47,7 +47,7 @@ function AuthPage() {
       if (modo === "ingreso") {
         const { error } = await supabase.auth.signInWithPassword({ email: f.email, password: f.password });
         if (error) throw error;
-        navigate({ to: "/panel" });
+        navigate({ to: "/inicio" });
       } else {
         if (rol === "mecanico" && (!f.nombre_taller.trim() || !f.ciudad.trim())) {
           throw new Error("Los mecánicos deben indicar el nombre del taller y la ciudad.");
@@ -56,7 +56,7 @@ function AuthPage() {
           email: f.email,
           password: f.password,
           options: {
-            emailRedirectTo: window.location.origin + "/panel",
+            emailRedirectTo: window.location.origin + "/inicio",
             data: { nombre: f.nombre, rol, nombre_taller: f.nombre_taller, ciudad: f.ciudad },
           },
         });
@@ -65,7 +65,7 @@ function AuthPage() {
           const { error: e2 } = await supabase.auth.signInWithPassword({ email: f.email, password: f.password });
           if (e2) throw e2;
         }
-        navigate({ to: "/panel" });
+        navigate({ to: "/inicio" });
       }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Algo salió mal";

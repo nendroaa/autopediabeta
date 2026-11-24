@@ -12,11 +12,12 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
 import { Route as AuthRouteImport } from './routes/auth'
+import { Route as PanelRouteImport } from './routes/panel'
 import { Route as AuthenticatedAdminRouteImport } from './routes/_authenticated/admin'
 import { Route as AuthenticatedConductorRouteImport } from './routes/_authenticated/conductor'
 import { Route as AuthenticatedForoRouteImport } from './routes/_authenticated/foro'
+import { Route as AuthenticatedInicioRouteImport } from './routes/_authenticated/inicio'
 import { Route as AuthenticatedMecanicoRouteImport } from './routes/_authenticated/mecanico'
-import { Route as AuthenticatedPanelRouteImport } from './routes/_authenticated/panel'
 import { Route as AuthenticatedPublicacionIdRouteImport } from './routes/_authenticated/publicacion.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -31,6 +32,11 @@ const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
   path: '/auth',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PanelRoute = PanelRouteImport.update({
+  id: '/panel',
+  path: '/panel',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AuthenticatedAdminRoute = AuthenticatedAdminRouteImport.update({
@@ -48,14 +54,14 @@ const AuthenticatedForoRoute = AuthenticatedForoRouteImport.update({
   path: '/foro',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
+const AuthenticatedInicioRoute = AuthenticatedInicioRouteImport.update({
+  id: '/inicio',
+  path: '/inicio',
+  getParentRoute: () => AuthenticatedRouteRoute,
+} as any)
 const AuthenticatedMecanicoRoute = AuthenticatedMecanicoRouteImport.update({
   id: '/mecanico',
   path: '/mecanico',
-  getParentRoute: () => AuthenticatedRouteRoute,
-} as any)
-const AuthenticatedPanelRoute = AuthenticatedPanelRouteImport.update({
-  id: '/panel',
-  path: '/panel',
   getParentRoute: () => AuthenticatedRouteRoute,
 } as any)
 const AuthenticatedPublicacionIdRoute =
@@ -68,21 +74,23 @@ const AuthenticatedPublicacionIdRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/panel': typeof PanelRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/conductor': typeof AuthenticatedConductorRoute
   '/foro': typeof AuthenticatedForoRoute
+  '/inicio': typeof AuthenticatedInicioRoute
   '/mecanico': typeof AuthenticatedMecanicoRoute
-  '/panel': typeof AuthenticatedPanelRoute
   '/publicacion/$id': typeof AuthenticatedPublicacionIdRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
+  '/panel': typeof PanelRoute
   '/admin': typeof AuthenticatedAdminRoute
   '/conductor': typeof AuthenticatedConductorRoute
   '/foro': typeof AuthenticatedForoRoute
+  '/inicio': typeof AuthenticatedInicioRoute
   '/mecanico': typeof AuthenticatedMecanicoRoute
-  '/panel': typeof AuthenticatedPanelRoute
   '/publicacion/$id': typeof AuthenticatedPublicacionIdRoute
 }
 export interface FileRoutesById {
@@ -90,11 +98,12 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
+  '/panel': typeof PanelRoute
   '/_authenticated/admin': typeof AuthenticatedAdminRoute
   '/_authenticated/conductor': typeof AuthenticatedConductorRoute
   '/_authenticated/foro': typeof AuthenticatedForoRoute
+  '/_authenticated/inicio': typeof AuthenticatedInicioRoute
   '/_authenticated/mecanico': typeof AuthenticatedMecanicoRoute
-  '/_authenticated/panel': typeof AuthenticatedPanelRoute
   '/_authenticated/publicacion/$id': typeof AuthenticatedPublicacionIdRoute
 }
 export interface FileRouteTypes {
@@ -102,32 +111,35 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/auth'
+    | '/panel'
     | '/admin'
     | '/conductor'
     | '/foro'
+    | '/inicio'
     | '/mecanico'
-    | '/panel'
     | '/publicacion/$id'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/auth'
+    | '/panel'
     | '/admin'
     | '/conductor'
     | '/foro'
+    | '/inicio'
     | '/mecanico'
-    | '/panel'
     | '/publicacion/$id'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
+    | '/panel'
     | '/_authenticated/admin'
     | '/_authenticated/conductor'
     | '/_authenticated/foro'
+    | '/_authenticated/inicio'
     | '/_authenticated/mecanico'
-    | '/_authenticated/panel'
     | '/_authenticated/publicacion/$id'
   fileRoutesById: FileRoutesById
 }
@@ -135,6 +147,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
   AuthRoute: typeof AuthRoute
+  PanelRoute: typeof PanelRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -160,6 +173,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/panel': {
+      id: '/panel'
+      path: '/panel'
+      fullPath: '/panel'
+      preLoaderRoute: typeof PanelRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_authenticated/admin': {
       id: '/_authenticated/admin'
       path: '/admin'
@@ -181,18 +201,18 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedForoRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/inicio': {
+      id: '/_authenticated/inicio'
+      path: '/inicio'
+      fullPath: '/inicio'
+      preLoaderRoute: typeof AuthenticatedInicioRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
     '/_authenticated/mecanico': {
       id: '/_authenticated/mecanico'
       path: '/mecanico'
       fullPath: '/mecanico'
       preLoaderRoute: typeof AuthenticatedMecanicoRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
-    }
-    '/_authenticated/panel': {
-      id: '/_authenticated/panel'
-      path: '/panel'
-      fullPath: '/panel'
-      preLoaderRoute: typeof AuthenticatedPanelRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
     '/_authenticated/publicacion/$id': {
@@ -209,8 +229,8 @@ interface AuthenticatedRouteRouteChildren {
   AuthenticatedAdminRoute: typeof AuthenticatedAdminRoute
   AuthenticatedConductorRoute: typeof AuthenticatedConductorRoute
   AuthenticatedForoRoute: typeof AuthenticatedForoRoute
+  AuthenticatedInicioRoute: typeof AuthenticatedInicioRoute
   AuthenticatedMecanicoRoute: typeof AuthenticatedMecanicoRoute
-  AuthenticatedPanelRoute: typeof AuthenticatedPanelRoute
   AuthenticatedPublicacionIdRoute: typeof AuthenticatedPublicacionIdRoute
 }
 
@@ -218,8 +238,8 @@ const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedAdminRoute: AuthenticatedAdminRoute,
   AuthenticatedConductorRoute: AuthenticatedConductorRoute,
   AuthenticatedForoRoute: AuthenticatedForoRoute,
+  AuthenticatedInicioRoute: AuthenticatedInicioRoute,
   AuthenticatedMecanicoRoute: AuthenticatedMecanicoRoute,
-  AuthenticatedPanelRoute: AuthenticatedPanelRoute,
   AuthenticatedPublicacionIdRoute: AuthenticatedPublicacionIdRoute,
 }
 
@@ -230,6 +250,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
   AuthRoute: AuthRoute,
+  PanelRoute: PanelRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
