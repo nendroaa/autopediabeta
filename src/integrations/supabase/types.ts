@@ -19,6 +19,8 @@ export type Database = {
           detalle: Json
           fecha: string
           id: string
+          origen: string
+          rol: string | null
           tipo: string
           user_id: string | null
         }
@@ -26,6 +28,8 @@ export type Database = {
           detalle?: Json
           fecha?: string
           id?: string
+          origen?: string
+          rol?: string | null
           tipo: string
           user_id?: string | null
         }
@@ -33,6 +37,8 @@ export type Database = {
           detalle?: Json
           fecha?: string
           id?: string
+          origen?: string
+          rol?: string | null
           tipo?: string
           user_id?: string | null
         }
@@ -45,6 +51,7 @@ export type Database = {
           id: string
           nombre: string
           nombre_taller: string | null
+          origen: string
           rol: string
           verificado: boolean
         }
@@ -54,6 +61,7 @@ export type Database = {
           id: string
           nombre?: string
           nombre_taller?: string | null
+          origen?: string
           rol: string
           verificado?: boolean
         }
@@ -63,6 +71,7 @@ export type Database = {
           id?: string
           nombre?: string
           nombre_taller?: string | null
+          origen?: string
           rol?: string
           verificado?: boolean
         }
@@ -78,6 +87,7 @@ export type Database = {
           id: string
           marca: string
           modelo: string
+          origen: string
           sintoma: string
         }
         Insert: {
@@ -89,6 +99,7 @@ export type Database = {
           id?: string
           marca: string
           modelo: string
+          origen?: string
           sintoma: string
         }
         Update: {
@@ -100,6 +111,7 @@ export type Database = {
           id?: string
           marca?: string
           modelo?: string
+          origen?: string
           sintoma?: string
         }
         Relationships: []
@@ -144,6 +156,7 @@ export type Database = {
           estado: string
           id: string
           mecanico_id: string | null
+          origen: string
           pagador: string
           precio: number
           publicacion_id: string
@@ -156,6 +169,7 @@ export type Database = {
           estado?: string
           id?: string
           mecanico_id?: string | null
+          origen?: string
           pagador?: string
           precio?: number
           publicacion_id: string
@@ -168,6 +182,7 @@ export type Database = {
           estado?: string
           id?: string
           mecanico_id?: string | null
+          origen?: string
           pagador?: string
           precio?: number
           publicacion_id?: string
@@ -241,6 +256,7 @@ export type Database = {
         }
         Returns: boolean
       }
+      is_admin: { Args: never; Returns: boolean }
       registrar_clic_destacar: { Args: never; Returns: undefined }
       verificar_mecanico: { Args: { _id: string }; Returns: undefined }
     }
